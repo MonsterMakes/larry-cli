@@ -1,0 +1,34 @@
+{
+ "name": "@monstermakes/larry-cli",
+ "description": "A common base for building command line applications.",
+ "version": "0.0.1",
+ "bin": {},
+ "publishConfig": {},
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/MonsterMakes/larry-cli.git"
+ },
+ "license": "MIT",
+ "scripts": {
+  "lint-fix": "echo '=> Fixing Linting errors...' && eslint {src,cypress,test}/**/*.js --fix",
+  "lint": "echo '=> Linting' && eslint **/*.js",
+  "test": "echo '=> Running Tests' && mocha -u tdd --timeout 60000 --colors test/**/*.spec.js",
+  "test-coverage": "echo '=> Running Tests w/ Coverage' && nyc mocha test/**/*.spec.js",
+  "test-coverage:http": "echo '=> Running Tests w/ Coverage' && nyc --reporter=html mocha test/**/*.spec.js",
+  "watch-test": "echo '=> Running Test Watcher' && mocha --watch test/**/*.spec.js",
+  "readiness-check": "echo '=> Checking Readiness' && npm run lint && npm test",
+  "prepublishOnly": "npm run readiness-check"
+ },
+ "dependencies": {
+  "lodash": "^4.17.4",
+  "vorpal": "^1.11.4"
+ },
+ "devDependencies": {
+  "mocha": "^5.0.0",
+  "chai": "^4.1.2",
+  "chai-as-promised": "^7.1.1",
+  "chai-files": "^1.4.0",
+  "eslint": "^4.17.0",
+  "nyc": "^11.4.1"
+ }
+}
