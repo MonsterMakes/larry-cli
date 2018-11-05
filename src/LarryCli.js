@@ -5,7 +5,7 @@ const CLEAR_CODE = '\u001b[2J\u001b[0;0H';
 
 let self = undefined;
 
-function commonActions(vorpalInstance,rootVorpalInstance) {
+function commonActions(vorpalInstance,rootVorpalInstance) {//eslint-disable-line
 	//Enter sub cli
 	vorpalInstance
 		.command('enter [subCli]')
@@ -74,11 +74,11 @@ function commonActions(vorpalInstance,rootVorpalInstance) {
 		});
 	//clear
 	vorpalInstance
-	.command('clear', 'Clear the screen.')
-	.action((args, callback)=>{
-		self.clear();
-		callback();
-	});
+		.command('clear', 'Clear the screen.')
+		.action((args, callback)=>{
+			self.clear();
+			callback();
+		});
 }
 
 function subModuleCommonActions(vorpalInstance,rootVorpalInstance) {
@@ -145,6 +145,9 @@ class LarryCli{
 	/****************************************************************/
 	/* START PUBLIC METHODS */
 	/****************************************************************/
+	get interactiveMode(){
+		return this._interactiveMode;
+	}
 	clear(){
 		this._vorpalInstance.log(CLEAR_CODE);
 	}
@@ -156,8 +159,9 @@ class LarryCli{
 	 */
 	run(){
 		const parsedArgs = this._vorpalInstance.parse(process.argv, { use: 'minimist' });
-		const interactive = parsedArgs._ === undefined || (_.isArray(parsedArgs._) && _.isEmpty(parsedArgs._));
-		if (interactive) {
+		this._interactiveMode = parsedArgs._ === undefined || (_.isArray(parsedArgs._) && _.isEmpty(parsedArgs._));
+		if (this._interactiveMode) {
+
 			return this._vorpalInstance
 				.delimiter(this._vorpalInstance.chalk.blue(this._prompt))
 				.log(CLEAR_CODE)
