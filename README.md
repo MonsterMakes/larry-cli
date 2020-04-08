@@ -1,3 +1,5 @@
+# THIS PROJECT IS NOW BEING MAINTAINED IN THE LARRY (https://github.com/MonsterMakes/larry) MONOREPO
+
 # larry-cli 
 [![npm version](https://badge.fury.io/js/%40monstermakes%2Flarry-cli.svg)](https://badge.fury.io/js/%40monstermakes%2Flarry-cli)
 
